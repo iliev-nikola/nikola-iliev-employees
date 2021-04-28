@@ -12,7 +12,7 @@ function upload() {
                 employees = employees.map(el => {
                     el = el.split(',');
                     const dateFrom = new Date(el[2]).getTime();
-                    const dateTo = el[3] === 'NULL\r' ? Date.now() : new Date(el[3]).getTime();
+                    const dateTo = el[3] === 'NULL\r' || !el[3] ? Date.now() : new Date(el[3]).getTime();
                     el = {
                         empId: el[0],
                         projectId: el[1],
@@ -42,7 +42,7 @@ function findProjectPartners() {
         for (let j = i + 1; j < employees.length; j++) {
             // check if both workers work in same project and on same period
             const emp2 = employees[j];
-            const ifSameProject = employees[i].projectId === employees[j].projectId;
+            const ifSameProject = emp1.projectId === emp2.projectId;
             if (!ifSameProject) {
                 continue;
             }
@@ -61,8 +61,8 @@ function findProjectPartners() {
                 const workingDays = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const obj = {
                     days: workingDays,
-                    emp1: +emp1.empId > +emp2.empId ? +emp2.empId : +emp1.empId,
-                    emp2: +emp1.empId < +emp2.empId ? +emp2.empId : +emp1.empId
+                    employees: +emp1.empId > +emp2.empId ? `${emp2.empId}-${emp1.empId}` : `${emp1.empId}-${emp2.empId}`,
+                    projectId: +emp1.projectId
                 }
 
                 output.push(obj);
@@ -73,6 +73,40 @@ function findProjectPartners() {
     return output;
 }
 
+function findBestPartners() {
+    let partners = findProjectPartners();
+    partners = partners.reduce((acc, el) => {
+        if (acc[el.employees]) {
+            acc[el.employees] += el.days;
+        } else {
+            acc[el.employees] = el.days;
+        }
+
+        return acc;
+    }, {});
+
+    // check if most working days are equal in some cases
+    const partnersIds = Object.keys(partners).sort((a, b) => partners[b] - partners[a])[0];
+    return partnersIds;
+}
+
+function bestPartnersProjects() {
+    let partners = findProjectPartners();
+    const partnersIds = findBestPartners();
+    partners = partners.filter(el => el.employees === partnersIds);
+    partners = partners.map(el => {
+        const [emp1Id, emp2Id] = el.employees.split('-').map(Number);
+        const projectId = el.projectId;
+        const days = el.days;
+        return {
+            emp1Id,
+            emp2Id,
+            projectId,
+            days
+        }
+    });
+    console.log(partners)
+}
 
 FILE_INPUT.addEventListener('change', upload);
-BUTTON.addEventListener('click', findTwoEmployees);
+BUTTON.addEventListener('click', bestPartnersProjects);
