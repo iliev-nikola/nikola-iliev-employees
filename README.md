@@ -1,6 +1,6 @@
 # Employees - little interview task
 
-## Link to hosted project:
+## Link to hosted project: [here](https://iliev-nikola.github.io/nikola-iliev-employees/)
 
 ### Technologies:
 
