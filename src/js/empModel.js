@@ -24,7 +24,7 @@ const empModel = (function () {
                         return el;
                     });
 
-                    bestPartnersProjects();
+                    utils.render(bestPartnersProjects());
                 }
 
                 reader.readAsText(FILE_INPUT.files[0]);
@@ -108,7 +108,6 @@ const empModel = (function () {
             }
         });
 
-        utils.render(partners);
         return partners;
     }
 
