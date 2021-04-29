@@ -22,6 +22,7 @@ const utils = (function () {
             return;
         }
 
+        NO_RESULTS.style.display = 'none';
         TABLE.innerHTML = '';
         const tr = createEl('tr', null, 'row');
         const emp1IdHead = createEl('th', 'Employee ID #1', 'cell');

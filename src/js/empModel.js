@@ -4,6 +4,10 @@ const empModel = (function () {
     function uploadFile() {
         // read the text file and fill employees array with some employees
         const regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+        if (!FILE_INPUT.value) {
+            return;
+        }
+
         if (regex.test(FILE_INPUT.value.toLowerCase())) {
             if (typeof (FileReader) != 'undefined') {
                 const reader = new FileReader();
