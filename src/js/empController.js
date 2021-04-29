@@ -1,3 +1,2 @@
-
-FILE_INPUT.addEventListener('change', empModel.upload);
-BUTTON.addEventListener('click', empModel.bestPartnersProjects);
+FILE_INPUT.addEventListener('change', empModel.uploadFile);
+SORT_BY.addEventListener('change', utils.sortBy)

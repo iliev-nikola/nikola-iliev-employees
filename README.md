@@ -1,6 +1,11 @@
 # Employees - little interview task
 
-## Rules:
+## Link to hosted project:
+
+### Technologies:
+
+- Languages: Vanilla JS, HTML, CSS
+- Pattern: MVC
 
 ### Mandatory conditions:
 

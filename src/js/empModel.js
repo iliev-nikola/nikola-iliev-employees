@@ -1,7 +1,7 @@
 const empModel = (function () {
     let employees;
 
-    function upload() {
+    function uploadFile() {
         // read the text file and fill employees array with some employees
         const regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
         if (regex.test(FILE_INPUT.value.toLowerCase())) {
@@ -23,6 +23,8 @@ const empModel = (function () {
 
                         return el;
                     });
+
+                    bestPartnersProjects();
                 }
 
                 reader.readAsText(FILE_INPUT.files[0]);
@@ -40,7 +42,7 @@ const empModel = (function () {
         for (let i = 0; i < employees.length - 1; i++) {
             const emp1 = employees[i];
             for (let j = i + 1; j < employees.length; j++) {
-                // check if both workers work in same project and on same period
+                // check if two workers work in same project and on same period
                 const emp2 = employees[j];
                 const ifSameProject = emp1.projectId === emp2.projectId;
                 if (!ifSameProject) {
@@ -105,14 +107,13 @@ const empModel = (function () {
                 days
             }
         });
-        console.log(partners)
+
+        utils.render(partners);
         return partners;
     }
 
     return {
-        upload,
-        findProjectPartners,
-        findBestPartners,
+        uploadFile,
         bestPartnersProjects
     }
 })();
