@@ -52,6 +52,7 @@ const empModel = (function () {
                 if (!ifSameProject) {
                     continue;
                 }
+								
                 let diff;
                 if (emp2.dateFrom >= emp1.dateFrom && emp2.dateTo <= emp1.dateTo) {
                     diff = emp2.dateTo - emp2.dateFrom;
