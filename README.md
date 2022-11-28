@@ -1,10 +1,10 @@
-# Employees - little interview task
+# Employees - little interview task for beginners
 
 ## Link to hosted project: [here](https://iliev-nikola.github.io/nikola-iliev-employees/)
 
 ### Technologies:
 
-- Languages: Vanilla JS, HTML, CSS
+- Languages: JavaScript, HTML, CSS
 - Pattern: MVC
 
 ### Mandatory conditions:
